@@ -1,14 +1,60 @@
 //timer to start 
 
 var countdown = getElementByID("countdown");
-
+//getting questions from text
 let question1 = document.getElementByID("q1");
 let question2 = document.getElementByID("q2");
 let question3 = document.getElementByID("q3");
 let question4 = document.getElementByID("q4");
-let question5 = document.getElementByID("q5");
 
+//getting options from text
+let option1 = document.getElementById("o1");
+let option1 = document.getElementById("o2");
+let option1 = document.getElementById("o3");
+let option1 = document.getElementById("o4");
 
+//I will set up the questions here
+
+var questions = [{
+    id: 0,
+    question: "Which of the following are JavaScript Dataypes?",
+    answer: [{text: "boolean", isCorrect: false },
+             { text: "quote", isCorrect: false },
+             { text: "string", isCorrect: false },
+             { text: "a and b", isCorrect: true }
+        ]
+},
+
+{
+    id: 1,
+    question: "Which of the following are JavaScript Dataypes",
+    answer: [{text: "boolean", isCorrect: false },
+             { text: "quote", isCorrect: false },
+             { text: "string", isCorrect: false },
+             { text: "a and b", isCorrect: true }
+        ]
+},
+
+{
+    id: 2,
+    question: "Which of the following are JavaScript Dataypes",
+    answer: [{text: "boolean", isCorrect: false },
+             { text: "quote", isCorrect: false },
+             { text: "string", isCorrect: false },
+             { text: "a and b", isCorrect: true }
+        ]
+},
+
+{
+    id: 3,
+    question: "Which of the following are JavaScript Dataypes",
+    answer: [{text: "boolean", isCorrect: false },
+             { text: "quote", isCorrect: false },
+             { text: "string", isCorrect: false },
+             { text: "a and b", isCorrect: true }
+        ]
+    }
+]
 //need function to get questions to progress to next after answered
 
 nextQuestion.onclick = function() {
