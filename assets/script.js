@@ -1,29 +1,30 @@
 // Core Variables
-    var startQuizButton = document.getElementById('startButton');
-    var highScoreButton = document.querySelector('.highScoresButton');
-    var remainingTime = document.getElementById('remainingTime');
-    var nextQuestionButton = document.getElementById('nextQuestion');
-    var countDownHeader = document.getElementById('countdown');
+    var startQuizButton = document.getElementById("startButton");
+    var highScoreButton = document.querySelector(".highScoresButton");
+    var remainingTime = document.getElementById("remainingTime");
+    var nextQuestionButton = document.getElementById("nextQuestion");
+    var countDownHeader = document.getElementById("countdown");
+    var verifyElement = document.getElementById("verify");
 
 // Screen wrappers
-    var screenOneWrapper = document.querySelector('.screen-1');
-    var screenTwoWrapper = document.querySelector('.screen-2');
-    var screenThreeWrapper = document.querySelector('.screen-3');
-    var screenFourWrapper = document.querySelector('.screen-4');
+    var screenOneWrapper = document.querySelector(".screen-1");
+    var screenTwoWrapper = document.querySelector(".screen-2");
+    var screenThreeWrapper = document.querySelector(".screen-3");
+    var screenFourWrapper = document.querySelector(".screen-4");
     var timeLeft = 100;
 
-    
 // Quiz questions
-    var question1 = document.getElementById('q1');
-    var question2 = document.getElementById('q2');
-    var question3 = document.getElementById('q3');
-    var question4 = document.getElementById('q4');
+    var questionArray = [];
+    var question1 = document.getElementById("q1");
+    var question2 = document.getElementById("q2");
+    var question3 = document.getElementById("q3");
+    var question4 = document.getElementById("q4");
 
 // Quiz questions Options
-    var questionOneOptions = document.querySelector('.questionOneOptions');
-    var questionTwoOptions = document.querySelector('.questionTwoOptions');
-    var questionThreeOptions = document.querySelector('.questionThreeOptions');
-    var questionFourOptions = document.querySelector('.questionFourOptions');
+    var questionOneOptions = document.querySelector(".questionOneOptions");
+    var questionTwoOptions = document.querySelector(".questionTwoOptions");
+    var questionThreeOptions = document.querySelector(".questionThreeOptions");
+    var questionFourOptions = document.querySelector(".questionFourOptions");
 
 // Created variables
 
@@ -89,8 +90,8 @@
         
         
         // hide the screen 1 and show screen 2
-        screenOneWrapper.classList.add('hidden');
-        screenTwoWrapper.classList.remove('hidden'); 
+        screenOneWrapper.classList.add("hidden");
+        screenTwoWrapper.classList.remove("hidden"); 
         putOptionsIntoHTML();
     }
 
@@ -116,25 +117,25 @@
             question4.textContent = quizData[3].question;
         }
 
-        var questionOneOptionOne = document.getElementById('q1o1');
-        var questionOneOptionTwo = document.getElementById('q1o2');
-        var questionOneOptionThree = document.getElementById('q1o3');
-        var questionOneOptionFour = document.getElementById('q1o4');
+        var questionOneOptionOne = document.getElementById("q1o1");
+        var questionOneOptionTwo = document.getElementById("q1o2");
+        var questionOneOptionThree = document.getElementById("q1o3");
+        var questionOneOptionFour = document.getElementById("q1o4");
     
-        var questionTwoOptionOne = document.getElementById('q2o1');
-        var questionTwoOptionTwo = document.getElementById('q2o2');
-        var questionTwoOptionThree = document.getElementById('q2o3');
-        var questionTwoOptionFour = document.getElementById('q2o4');
+        var questionTwoOptionOne = document.getElementById("q2o1");
+        var questionTwoOptionTwo = document.getElementById("q2o2");
+        var questionTwoOptionThree = document.getElementById("q2o3");
+        var questionTwoOptionFour = document.getElementById("q2o4");
     
-        var questionThreeOptionOne = document.getElementById('q3o1');
-        var questionThreeOptionTwo = document.getElementById('q3o2');
-        var questionThreeOptionThree = document.getElementById('q3o3');
-        var questionThreeOptionFour = document.getElementById('q3o4');
+        var questionThreeOptionOne = document.getElementById("q3o1");
+        var questionThreeOptionTwo = document.getElementById("q3o2");
+        var questionThreeOptionThree = document.getElementById("q3o3");
+        var questionThreeOptionFour = document.getElementById("q3o4");
     
-        var questionFourOptionOne = document.getElementById('q4o1');
-        var questionFourOptionTwo = document.getElementById('q4o2');
-        var questionFourOptionThree = document.getElementById('q4o3');
-        var questionFourOptionFour = document.getElementById('q4o4');
+        var questionFourOptionOne = document.getElementById("q4o1");
+        var questionFourOptionTwo = document.getElementById("q4o2");
+        var questionFourOptionThree = document.getElementById("q4o3");
+        var questionFourOptionFour = document.getElementById("q4o4");
     
         //  adding in options                   
         if(questionOneOptionOne) {
@@ -167,14 +168,14 @@
     }
 
     function quizComplete() {
-        var scoreText = document.querySelector('.scoreText');
+        var scoreText = document.querySelector(".scoreText");
         var score = timeLeft;
         // Moving to the next screen
         screenTwoWrapper.classList.add('hidden');
         screenThreeWrapper.classList.remove('hidden');
         // Changing Content on the page
         countDownHeader.textContent = "Your score is " + score + "."
-        scoreText.textContent = score
+        scoreText.textContent = score;
     }
 
     function store() {
@@ -185,29 +186,45 @@
         // use local storage to set initials and score
         localStorage.setItem("Initials", inputTesterInitials.value);
         localStorage.setItem("Score", inputTesterScore.textContent);
+
+
+        // Moving to the next screen
+        screenThreeWrapper.classList.add("hidden");
+        screenFourWrapper.classList.remove("hidden");
+
+        // use storage to populate highscore list items
+
+// BUG - can't add content to li from storage
+
+        // var scoreCardItem = document.getElementById("score");
+        // var storedInitialsValue = localStorage.getItem("Initials");
+        // var storedScoreValue = localStorage.getItem("Score");
+
+        // console.log("scoreCardItem html", scoreCardItem);
+        // scoreCardItem.textContent('It works');
+        // document.getElementById("score").innerHTML = "Item was changed";
     }
 
     function nextQuestion() {
-        var questionArray = [];
-        questionArray = document.querySelectorAll('.question');
+        questionArray = document.querySelectorAll(".question");
         
         // if selection is correct, hide the question group and unhide the next question group
         if(questionArray[0].classList.contains("active")) {
             questionArray[0].classList.remove("active");
             questionArray[1].classList.add("active");
-            console.log('questionSet 1');
+            console.log("questionSet 1");
             return
         }
         if(questionArray[1].classList.contains("active")) {
             questionArray[1].classList.remove("active");
             questionArray[2].classList.add("active");
-            console.log('questionSet 2');
+            console.log("questionSet 2");
             return
         }
         if(questionArray[2].classList.contains("active")) {
             questionArray[2].classList.remove("active");
             questionArray[3].classList.add("active");
-            console.log('questionSet 3');
+            console.log("questionSet 3");
             return
         }
         if(questionArray[3].classList.contains("active")) {
@@ -224,20 +241,14 @@
         var isCorrect = selectedItem.getAttribute("isCorrect");
         var isNotCorrect = selectedItem.getAttribute("isNotCorrect");
 
-        // verify div show if correct or not
-        var verifyElement = document.getElementById('verify');
 
         // Remove class after another button has been clicked
         if(isCorrect) {
-            // add style to change it green
-            selectedItem.classList.add("green");
             // change the text of the verify element
             verifyElement.textContent = isCorrect;
             // console.log(selectedItem);
             nextQuestion();
         } else {
-            // add styles to turn button red
-            selectedItem.classList.add("red");
             // change the text of the verify element
             verifyElement.textContent = isNotCorrect;
             // I need to change timeLeft variable from startQuiz function to subtract by 5 seconds for each wrong answer.
@@ -255,6 +266,24 @@
 
     function goBack() {
         // Figure out how to go back in the project without clearing the storage
+        // reset all the items
+        // Moving to the first screen
+        screenFourWrapper.classList.add("hidden");
+        screenOneWrapper.classList.remove("hidden");
+        countDownHeader.innerHTML = ("You have <span id='remainingTime'>100</span> seconds left!");
+        verifyElement = '';
+        timeLeft = 100;
+        console.log('reset timeleft', timeLeft);
+
+        if(questionArray[3].classList.contains("active")) {
+            questionArray[3].classList.remove("active");
+            questionArray[0].classList.add("active");
+        }
+        
+        // Next: 
+        // need to reset the questionArray correct on goBack.
+        // TimeLeft is not counting down on second pass thru.
+
     }
 
     function clearStorage() {

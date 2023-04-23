@@ -13,7 +13,7 @@
         <div class="quiz-header">
             <button class="highScoresButton">View High Scores</button>
             <div id="countdown" class="timer"> 
-                You have <span max="60" id="remainingTime">90</span> seconds left! 
+                You have <span id="remainingTime">100</span> seconds left! 
             </div>
         </div>
 
@@ -89,9 +89,9 @@
             <div class="screen-4 hidden">
                 <!-- View High Scores - final score & restart quiz -->
                 <h1>High scores</h1>
-                
+
                 <ol class="scoreCard">
-                    <li class="score"></li>
+                    <li id="score"></li>
                 </ol>
 
                 <button onclick="goBack()">Go Back</button>
