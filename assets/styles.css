@@ -1,0 +1,18 @@
+.quiz-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.quiz-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.quiz-content {
+    flex-direction: column;
+}
+
+.hidden {
+    display: none;
+}
