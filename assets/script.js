@@ -82,8 +82,8 @@
                 remainingTime.textContent = timeLeft;
                 timeLeft -= 1;
             } else {
-                alert("Time is up!");
                 clearInterval(HeaderTimer);
+                quizComplete();
             }
         }, 1000);
         
@@ -166,6 +166,17 @@
         }
     }
 
+    function quizComplete() {
+        var scoreText = document.querySelector('.scoreText');
+        var score = timeLeft;
+        // Moving to the next screen
+        screenTwoWrapper.classList.add('hidden');
+        screenThreeWrapper.classList.remove('hidden');
+        // Changing Content on the page
+        countDownHeader.textContent = "Your score is " + score + "."
+        scoreText.textContent = "Your score is " + score + "."
+    }
+
     function nextQuestion() {
         var questionArray = [];
         questionArray = document.querySelectorAll('.question');
@@ -190,9 +201,7 @@
             return
         }
         if(questionArray[3].classList.contains("active")) {
-            console.log('Quiz complete');
-            var score = timeLeft;
-            countDownHeader.textContent = "You're score is " + score + " !"
+            quizComplete();
         }
         // var parentElement = selectedItem.parentElement
     }
@@ -234,16 +243,9 @@
         }
     }
 
-    
-// Need function to get questions to progress to next after answered
-
-    // nextQuestion.onclick = function() {
-    //     if (nextQuestion > question1) {
-    //         question1.style.display = 'none'
-    //         question2.style.display = 'block' //how does this work with 5 questions?
-    //     }
-    // }
-
-// Screen Three work
+// Screen Three work 
+//  Score is calculated already 
+//  I need to change the screen to an input screen with a place to store initials and show my score.
+// 
 
 // Screen four final step
