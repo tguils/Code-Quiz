@@ -174,7 +174,17 @@
         screenThreeWrapper.classList.remove('hidden');
         // Changing Content on the page
         countDownHeader.textContent = "Your score is " + score + "."
-        scoreText.textContent = "Your score is " + score + "."
+        scoreText.textContent = score
+    }
+
+    function store() {
+        var inputTesterInitials = document.getElementById("testerInitials");
+        var inputTesterScore = document.querySelector(".scoreText");
+        // console.log('score', inputTesterScore);
+        // console.log('score', inputTesterScore.textContent);
+        // use local storage to set initials and score
+        localStorage.setItem("Initials", inputTesterInitials.value);
+        localStorage.setItem("Score", inputTesterScore.textContent);
     }
 
     function nextQuestion() {
@@ -243,9 +253,21 @@
         }
     }
 
+    function goBack() {
+        // Figure out how to go back in the project without clearing the storage
+    }
+
+    function clearStorage() {
+        // clear the storage without refreshing the page.
+    }
+
 // Screen Three work 
 //  Score is calculated already 
 //  I need to change the screen to an input screen with a place to store initials and show my score.
+
 // 
 
 // Screen four final step
+// change to screen four
+// add in initials and scores from storage
+// create go back and clear functions
