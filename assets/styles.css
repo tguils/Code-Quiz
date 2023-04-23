@@ -24,3 +24,11 @@
 .red {
     background-color: red;
 }
+
+.question {
+    display: none;
+}
+
+.question.active {
+    display: block;
+}

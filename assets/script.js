@@ -3,12 +3,27 @@
     var highScoreButton = document.querySelector('.highScoresButton');
     var remainingTime = document.getElementById('remainingTime');
     var nextQuestionButton = document.getElementById('nextQuestion');
+    var countDownHeader = document.getElementById('countdown');
 
 // Screen wrappers
     var screenOneWrapper = document.querySelector('.screen-1');
     var screenTwoWrapper = document.querySelector('.screen-2');
     var screenThreeWrapper = document.querySelector('.screen-3');
     var screenFourWrapper = document.querySelector('.screen-4');
+    var timeLeft = 100;
+
+    
+// Quiz questions
+    var question1 = document.getElementById('q1');
+    var question2 = document.getElementById('q2');
+    var question3 = document.getElementById('q3');
+    var question4 = document.getElementById('q4');
+
+// Quiz questions Options
+    var questionOneOptions = document.querySelector('.questionOneOptions');
+    var questionTwoOptions = document.querySelector('.questionTwoOptions');
+    var questionThreeOptions = document.querySelector('.questionThreeOptions');
+    var questionFourOptions = document.querySelector('.questionFourOptions');
 
 // Created variables
 
@@ -58,19 +73,20 @@
         }
     ]
 
+    
     // Screen 1 functions
     function startQuiz() {
-        var timeLeft = 90;
-
-        setInterval(function() {
-            if (timeLeft <= 0) {
-                clearInterval();
+        var HeaderTimer = setInterval(function() {
+            if (timeLeft >= 0) {
+                remainingTime.value = timeLeft;
+                remainingTime.textContent = timeLeft;
+                timeLeft -= 1;
+            } else {
+                alert("Time is up!");
+                clearInterval(HeaderTimer);
             }
-            remainingTime.value = timeLeft;
-            remainingTime.textContent = timeLeft;
-            timeLeft -= 1;
-        },
-        1000);
+        }, 1000);
+        
         
         // hide the screen 1 and show screen 2
         screenOneWrapper.classList.add('hidden');
@@ -80,11 +96,6 @@
 
     // Getting options from text
     function putOptionsIntoHTML() {
-    // Getting questions from text
-        var question1 = document.getElementById('q1');
-        var question2 = document.getElementById('q2');
-        var question3 = document.getElementById('q3');
-        var question4 = document.getElementById('q4');
     
     // I will set up the questions here
         
@@ -155,6 +166,37 @@
         }
     }
 
+    function nextQuestion() {
+        var questionArray = [];
+        questionArray = document.querySelectorAll('.question');
+        
+        // if selection is correct, hide the question group and unhide the next question group
+        if(questionArray[0].classList.contains("active")) {
+            questionArray[0].classList.remove("active");
+            questionArray[1].classList.add("active");
+            console.log('questionSet 1');
+            return
+        }
+        if(questionArray[1].classList.contains("active")) {
+            questionArray[1].classList.remove("active");
+            questionArray[2].classList.add("active");
+            console.log('questionSet 2');
+            return
+        }
+        if(questionArray[2].classList.contains("active")) {
+            questionArray[2].classList.remove("active");
+            questionArray[3].classList.add("active");
+            console.log('questionSet 3');
+            return
+        }
+        if(questionArray[3].classList.contains("active")) {
+            console.log('Quiz complete');
+            var score = timeLeft;
+            countDownHeader.textContent = "You're score is " + score + " !"
+        }
+        // var parentElement = selectedItem.parentElement
+    }
+
     function optionSelected(event) {
         // console.log(event.target);
         // How do I click the buttons and get a right or wrong answer?
@@ -172,11 +214,23 @@
             selectedItem.classList.add("green");
             // change the text of the verify element
             verifyElement.textContent = isCorrect;
+            // console.log(selectedItem);
+            nextQuestion();
         } else {
             // add styles to turn button red
             selectedItem.classList.add("red");
             // change the text of the verify element
             verifyElement.textContent = isNotCorrect;
+            // I need to change timeLeft variable from startQuiz function to subtract by 5 seconds for each wrong answer.
+
+            if(timeLeft <= 5) {
+                remainingTime.textContent = 0;
+                // BUG - there is an issue if time is below 5 seconds, need to figure out why
+            } else {
+                timeLeft -= 25;
+            }
+
+            nextQuestion();
         }
     }
 
