@@ -11,9 +11,9 @@
 <body>
     <div class="quiz-wrapper">
         <div class="quiz-header">
-            <button class="highScores">View High Scores</button>
+            <button class="highScoresButton">View High Scores</button>
             <div id="countdown" class="timer"> 
-                You have <span max="60" id="remainingTime">__</span> seconds left! 
+                You have <span max="60" id="remainingTime">90</span> seconds left! 
             </div>
         </div>
 
@@ -22,9 +22,9 @@
             <div class="screen-1">
                 <h1>Code Quiz</h1>
         
-                <p>Try to answer the following code-related questions</p>
+                <p>Try to answer the following code-related questions, timer starts when you click "Start Quiz" with 90 seconds on the clock.</p>
             
-                <button id="start">Start Quiz</button>
+                <button id="startButton" onclick="startQuiz()">Start Quiz</button>
             </div>
         
             <div class="screen-2 hidden">
@@ -48,11 +48,11 @@
             </div>
             
             <div class="screen-3 hidden">
-                <!-- Initials here -->
+                <!-- Submit Initials here -->
             </div>
         
             <div class="screen-4 hidden">
-                <!-- final score & restart quiz -->
+                <!-- View High Scores - final score & restart quiz -->
             </div>
         
         </div>
