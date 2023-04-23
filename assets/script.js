@@ -88,7 +88,6 @@
     
     // I will set up the questions here
         
-
         // adding in questions
         if(question1) {
             question1.textContent = quizData[0].question;
@@ -157,15 +156,31 @@
     }
 
     function optionSelected(event) {
+        // console.log(event.target);
         // How do I click the buttons and get a right or wrong answer?
-            var selectedItem = event.target;
+        // when user clicks each option a boolean test confirms
+        var selectedItem = event.target;
+        var isCorrect = selectedItem.getAttribute("isCorrect");
+        var isNotCorrect = selectedItem.getAttribute("isNotCorrect");
 
-        //when user clicks each option a boolean test confirms
         // verify div show if correct or not
-            var verifyElement = document.getElementById('verify');
-            verifyElement.textContent = selectedItem.getAttribute("isCorrect");
+        var verifyElement = document.getElementById('verify');
+
+        // Remove class after another button has been clicked
+        if(isCorrect) {
+            // add style to change it green
+            selectedItem.classList.add("green");
+            // change the text of the verify element
+            verifyElement.textContent = isCorrect;
+        } else {
+            // add styles to turn button red
+            selectedItem.classList.add("red");
+            // change the text of the verify element
+            verifyElement.textContent = isNotCorrect;
+        }
     }
 
+    
 // Need function to get questions to progress to next after answered
 
     // nextQuestion.onclick = function() {
