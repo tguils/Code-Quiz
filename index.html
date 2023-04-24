@@ -11,9 +11,9 @@
 <body>
     <div class="quiz-wrapper">
         <div class="quiz-header">
-            <button class="highScores">View High Scores</button>
+            <button class="highScoresButton">View High Scores</button>
             <div id="countdown" class="timer"> 
-                You have <span max="60" id="remainingTime">__</span> seconds left! 
+                You have <span id="remainingTime">100</span> seconds left! 
             </div>
         </div>
 
@@ -22,37 +22,80 @@
             <div class="screen-1">
                 <h1>Code Quiz</h1>
         
-                <p>Try to answer the following code-related questions</p>
+                <p>Try to answer the following code-related questions, timer starts when you click "Start Quiz" with 90 seconds on the clock.</p>
             
-                <button id="start">Start Quiz</button>
+                <button id="startButton" onclick="startQuiz()">Start Quiz</button>
             </div>
         
             <div class="screen-2 hidden">
                 <div class="result-container">
-                    <div id = "q1"></div>
-                    <div id = "q2"></div> 
-                    <div id = "q3"></div>
-                    <div id = "q4"></div>
+                    
+                    <div class="question active">
+                        <div id="q1"></div>
+                        <div class="questionOneOptions">
+                            <button id="q1o1" onclick="optionSelected(event)" isNotCorrect="false"></button>
+                            <button id="q1o2" onclick="optionSelected(event)" isNotCorrect="false"></button>
+                            <button id="q1o3" onclick="optionSelected(event)" isNotCorrect="false"></button>
+                            <button id="q1o4" onclick="optionSelected(event)" isCorrect="true"></button>
+                        </div>
+                    </div>
+                   
+                    <div class="question">
+                        <div id="q2"></div> 
+                        <div class="questionTwoOptions">
+                            <button id="q2o1" onclick="optionSelected(event)" isNotCorrect="false"></button>
+                            <button id="q2o2" onclick="optionSelected(event)" isCorrect="true"></button>
+                            <button id="q2o3" onclick="optionSelected(event)" isNotCorrect="false"></button>
+                            <button id="q2o4" onclick="optionSelected(event)" isNotCorrect="false"></button>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <div id="q3"></div>
+                        <div class="questionThreeOptions">
+                            <button id="q3o1" onclick="optionSelected(event)" isNotCorrect="false"></button>
+                            <button id="q3o2" onclick="optionSelected(event)" isNotCorrect="false"></button>
+                            <button id="q3o3" onclick="optionSelected(event)" isCorrect="true"></button>
+                            <button id="q3o4" onclick="optionSelected(event)" isNotCorrect="false"></button>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <div id="q4"></div>
+                        <div class="questionFourOptions">
+                            <button id="q4o1" onclick="optionSelected(event)" isNotCorrect="false"></button>
+                            <button id="q4o2" onclick="optionSelected(event)" isNotCorrect="false"></button>
+                            <button id="q4o3" onclick="optionSelected(event)" isNotCorrect="false"></button>
+                            <button id="q4o4" onclick="optionSelected(event)" isCorrect="true"></button>
+                        </div>
+                    </div>
                 </div>
             
-                <div class = "question-options">
-                    <div id = "o1"></div>
-                    <div id = "o2"></div>
-                    <div id = "o3"></div>
-                    <div id = "o4"></div>
-                </div>
-            
-                <div id="navigation">
-                    <button id ="nextQuestion">Next Question</button>
-                </div>
+                <div id="verify"></div>
             </div>
             
             <div class="screen-3 hidden">
-                <!-- Initials here -->
+                <!-- Submit Initials here -->
+                <h1>All done!</h1>
+                <p>Your score is <span class="scoreText"></span>.</p>
+                <label for="initials">Enter initials: </label>
+                <input id="testerInitials" name="initials" />
+                <!-- https://stackoverflow.com/questions/17087636/how-to-save-data-from-a-form-with-html5-local-storage -->
+                <button onclick="store()">Submit</button>
+                <!-- need to get the submit button to work -->
+                <!-- need to figure out how to store the high scores -->
             </div>
         
             <div class="screen-4 hidden">
-                <!-- final score & restart quiz -->
+                <!-- View High Scores - final score & restart quiz -->
+                <h1>High scores</h1>
+
+                <ol class="scoreCard">
+                    <li id="score"></li>
+                </ol>
+
+                <button onclick="goBack()">Go Back</button>
+                <button onclick="clearStorage()">Clear high scores</button>
             </div>
         
         </div>
