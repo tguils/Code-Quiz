@@ -26,7 +26,6 @@ var questionTwoOptions = document.querySelector(".questionTwoOptions");
 var questionThreeOptions = document.querySelector(".questionThreeOptions");
 var questionFourOptions = document.querySelector(".questionFourOptions");
 var userScoreArr = JSON.parse(localStorage.getItem("highscores")) || [];
-
 // Created variables
 
 var quizData = [
@@ -87,7 +86,7 @@ function startQuiz() {
     } 
   }, 1000);
 
-  // hide the screen 1 and show screen 2
+  // Hide the screen 1 and show screen 2
   screenOneWrapper.classList.add("hidden");
   screenTwoWrapper.classList.remove("hidden");
   putOptionsIntoHTML();
@@ -95,9 +94,7 @@ function startQuiz() {
 
 // Getting options from text
 function putOptionsIntoHTML() {
-  // I will set up the questions here
-
-  // adding in questions
+// Adding in questions
   if (question1) {
     question1.textContent = quizData[0].question;
   }
@@ -134,7 +131,7 @@ function putOptionsIntoHTML() {
   var questionFourOptionThree = document.getElementById("q4o3");
   var questionFourOptionFour = document.getElementById("q4o4");
 
-  //  adding in options
+  //  Adding in options
   if (questionOneOptionOne) {
     questionOneOptionOne.textContent = quizData[0].answer[0].text;
     questionOneOptionTwo.textContent = quizData[0].answer[1].text;
@@ -165,7 +162,7 @@ function putOptionsIntoHTML() {
 }
 
 function quizComplete() {
-  clearInterval(HeaderTimer);
+  clearInterval(headerTimer);
   var scoreText = document.querySelector(".scoreText");
   var score = timeLeft;
   // Moving to the next screen
@@ -179,9 +176,6 @@ function quizComplete() {
 function store() {
   var inputTesterInitials = document.getElementById("testerInitials");
   var inputTesterScore = document.querySelector(".scoreText");
-  // console.log('score', inputTesterScore);
-  // console.log('score', inputTesterScore.textContent);
-
   var userScoreObj = {
     initials: inputTesterInitials.value,
     score: timeLeft,
@@ -189,7 +183,6 @@ function store() {
   // use local storage to set initials and score
   userScoreArr.push(userScoreObj);
   localStorage.setItem("highscores", JSON.stringify(userScoreArr));
-
   // Moving to the next screen
   screenThreeWrapper.classList.add("hidden");
   screenFourWrapper.classList.remove("hidden");
@@ -233,74 +226,33 @@ function nextQuestion() {
   if (questionArray[3].classList.contains("active")) {
     quizComplete();
   }
-  // var parentElement = selectedItem.parentElement
 }
 
 function optionSelected(event) {
-  // console.log(event.target);
-  // How do I click the buttons and get a right or wrong answer?
-  // when user clicks each option a boolean test confirms
+  // When user clicks each option a boolean test confirms
   var selectedItem = event.target;
   var isCorrect = selectedItem.getAttribute("isCorrect");
   var isNotCorrect = selectedItem.getAttribute("isNotCorrect");
-
   // Remove class after another button has been clicked
   if (isCorrect) {
     // change the text of the verify element
     verifyElement.textContent = isCorrect;
-    //questionOneOptions.classList.add("green");
-    // console.log(selectedItem);
     nextQuestion();
   } else {
     // change the text of the verify element
     verifyElement.textContent = isNotCorrect;
-    // I need to change timeLeft variable from startQuiz function to subtract by 5 seconds for each wrong answer.
-
     if (timeLeft <= 5) {
       remainingTime.textContent = 0;
-      // BUG - there is an issue if time is below 5 seconds, need to figure out why
     } else {
       timeLeft -= 25;
     }
-
     nextQuestion();
   }
 }
 
 function goBack() {
-  // Figure out how to go back in the project without clearing the storage
-  // reset all the items
-  // Moving to the first screen
-//   screenFourWrapper.classList.add("hidden");
-//   screenOneWrapper.classList.remove("hidden");
-//   countDownHeader.innerHTML =
-//     "You have <span id='remainingTime'>100</span> seconds left!";
-//   verifyElement = "";
-//   timeLeft = 100;
-//   console.log("reset timeleft", timeLeft);
-
-//   if (questionArray[3].classList.contains("active")) {
-//     questionArray[3].classList.remove("active");
-//     questionArray[0].classList.add("active");
-//   }
-document.location.reload()
-  // Next:
-  // need to reset the questionArray correct on goBack.
-  // TimeLeft is not counting down on second pass thru.
+    document.location.reload()
 }
 
-function clearStorage() {
-  // clear the storage without refreshing the page.
-}
-
-// Screen Three work
-//  Score is calculated already
-//  I need to change the screen to an input screen with a place to store initials and show my score.
-
-//
-
-// Screen four final step
-// change to screen four
-// add in initials and scores from storage
-// create go back and clear functions
 startQuizButton.addEventListener('click', startQuiz)
+
