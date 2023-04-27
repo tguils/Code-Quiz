@@ -24,7 +24,7 @@
         
                 <p>Try to answer the following code-related questions, timer starts when you click "Start Quiz" with 90 seconds on the clock.</p>
             
-                <button id="startButton" onclick="startQuiz()">Start Quiz</button>
+                <button id="startButton" >Start Quiz</button>
             </div>
         
             <div class="screen-2 hidden">
@@ -81,7 +81,7 @@
                 <label for="initials">Enter initials: </label>
                 <input id="testerInitials" name="initials" />
                 <!-- https://stackoverflow.com/questions/17087636/how-to-save-data-from-a-form-with-html5-local-storage -->
-                <button onclick="store()">Submit</button>
+                <button id="submit">Submit</button>
                 <!-- need to get the submit button to work -->
                 <!-- need to figure out how to store the high scores -->
             </div>
@@ -91,11 +91,10 @@
                 <h1>High scores</h1>
 
                 <ol class="scoreCard">
-                    <li id="score"></li>
                 </ol>
 
-                <button onclick="goBack()">Go Back</button>
-                <button onclick="clearStorage()">Clear high scores</button>
+                <button id="restart">Go Back</button>
+                <button id="clear">Clear high scores</button>
             </div>
         
         </div>
